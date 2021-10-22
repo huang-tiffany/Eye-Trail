@@ -1,8 +1,10 @@
 var capture;
 var tracker;
 var positions;
-var pointsL;
-var pointsR;
+var pointsLx;
+var pointsRx;
+var pointsLy;
+var pointsRy;
 var lines;
 var time;
 var w = 0;
@@ -12,9 +14,20 @@ function setup() {
   w = windowWidth;
   h = windowHeight;
   capture = createCapture(VIDEO);
-  image(capture, 0, 0, w, h);
-  createCanvas(w, h);
-  capture.size(w, h);
+  image(capture, 0, 0);
+//  if (h > w) {
+//	  image(capture, 0, 0, w, w);
+//	  createCanvas(w, w);
+//	  capture.size(w, w);
+//  } else {
+//	  image(capture, 0, 0, h, h);
+//	  createCanvas(h, h);
+//	  capture.size(h, h);
+//  }
+	
+  image(capture, 0, 0, 800, 600);
+  createCanvas(800, 600);
+  capture.size(800, 600);
   capture.hide();
   
   tracker = new clm.tracker();
@@ -34,9 +47,19 @@ function setup() {
 }
 
 function draw() {
-  translate(w, 0);
+//	if (h > w) {
+//		translate(w, 0);
+//		scale(-1.0, 1.0);
+//  		image(capture, 0, 0);
+//	} else {
+//		translate(h, 0);
+//		scale(-1.0, 1.0);
+//  		image(capture, 0, 0);
+//	}
+	
+  translate(800, 0);
   scale(-1.0, 1.0);
-  image(capture, 0, 0, w, h);
+  image(capture, 0, 0, 800, 600);
   positions = tracker.getCurrentPosition();
   if (positions.length > 0) {
     var eyeL = {
